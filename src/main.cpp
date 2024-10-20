@@ -2,23 +2,25 @@
 #include <HCSR04.h>            // HCSR04 ultrasonic sensor@^2.0.3 library
 #include <Adafruit_NeoPixel.h> // onboard RGB library
 
+// define allocates to Flash Memory (non-volatile)
+
 #define PIN 38 // RGB
 #define NUMPIXELS 1
 
 // sensor 1
-const byte trig1 = 6;
-const byte echo1 = 7;
+const uint8_t trig1 = 6;
+const uint8_t echo1 = 7;
 
 // sensor 2
-const byte trig2 = 12;
-const byte echo2 = 11;
+const uint8_t trig2 = 12;
+const uint8_t echo2 = 11;
 
 // onboard RGB setup
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 // setting up both sensors
-HCSR04 sensor1(6, 7);
-HCSR04 sensor2(12, 11);
+HCSR04 sensor1(trig1, echo1);
+HCSR04 sensor2(trig2, echo2);
 
 // Threshold distance in cm (triggers green color)
 const float THRESHOLD = 10.0;
@@ -52,5 +54,5 @@ void loop()
     pixels.setPixelColor(0, pixels.Color(255, 0, 0)); // RED
   }
   pixels.show();
-  delay(1000);
+  delay(100);
 }
